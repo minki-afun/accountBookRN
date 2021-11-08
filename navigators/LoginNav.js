@@ -7,7 +7,12 @@ const Tabs = createBottomTabNavigator()
 
 const LoginNav = () => {
   return (
-    <Tabs.Navigator>
+    <Tabs.Navigator
+      screenOptions={{
+        headerTitle: "",
+        headerTransparent: true,
+      }}
+    >
       <Tabs.Screen name="Content" component={Content} />
       <Tabs.Screen name="User" component={User} />
     </Tabs.Navigator>
