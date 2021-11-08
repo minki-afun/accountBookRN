@@ -7,6 +7,7 @@ import { logUserIn } from "../apollo"
 import ButtonTemp from "../components/main/ButtonTemp"
 import LogoLayout from "../components/main/LogoLayout"
 
+// grapql 쿼리
 const LOGIN_MUTATION = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -27,22 +28,26 @@ const Login = ({ route: { params } }) => {
   })
   // 해당 input 입력 후 다음 input으로 자동이동
   const passwordRef = useRef()
+  // ref연결
+  const onNext = (nextOne) => {
+    nextOne?.current?.focus()
+  }
   // 제출 후 데이터 결과 및 처리과정
   const onCompleted = async (data) => {
     const {
-      login: { result, token },
+      login: { result, token, error },
     } = data
     if (result) {
       await logUserIn(token)
+    } else {
+      alert(error)
     }
   }
   // grapql 연결
   const [logInMutation, { loading }] = useMutation(LOGIN_MUTATION, {
     onCompleted,
   })
-  const onNext = (nextOne) => {
-    nextOne?.current?.focus()
-  }
+  // 데이터 처리
   const onData = (data) => {
     if (!loading) {
       logInMutation({
