@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import React, { useEffect, useState } from "react"
-import { View, Text, Button } from "react-native"
+import { View, Text, Button, TouchableOpacity } from "react-native"
 import { isLoggedInVar, logUserOut, tokenVar } from "../apollo"
 
 const User = () => {
@@ -14,7 +14,7 @@ const User = () => {
       }}
     >
       <Text style={{ color: "white" }}>User</Text>
-      <Button title="LogOut" onPress={logUserOut()} />
+      <TouchableOpacity title="LogOut" onPress={logUserOut()} />
     </View>
   )
 }
