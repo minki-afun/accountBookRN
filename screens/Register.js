@@ -4,7 +4,7 @@ import styled from "styled-components/native"
 import ButtonTemp from "../components/main/ButtonTemp"
 import LogoLayout from "../components/main/LogoLayout"
 
-const Login = ({ navigation }) => {
+const Register = ({ navigation }) => {
   // 해당 input 입력 후 다음 input으로 자동이동
   const passwordRef = useRef()
   const onNext = (nextOne) => {
@@ -34,7 +34,7 @@ const Login = ({ navigation }) => {
   )
 }
 
-export default Login
+export default Register
 
 const TextInput = styled.TextInput`
   width: 60%;
