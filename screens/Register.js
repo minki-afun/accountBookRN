@@ -1,10 +1,12 @@
 import React, { useRef } from "react"
+import { useForm } from "react-hook-form"
 import { Text, View } from "react-native"
 import styled from "styled-components/native"
 import ButtonTemp from "../components/main/ButtonTemp"
 import LogoLayout from "../components/main/LogoLayout"
 
 const Register = ({ navigation }) => {
+  const { register, handleSubmit, setValue, getValues } = useForm()
   // 해당 input 입력 후 다음 input으로 자동이동
   const passwordRef = useRef()
   const onNext = (nextOne) => {
