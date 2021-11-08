@@ -1,0 +1,12 @@
+npx expo-cli init Frontend_RN --npm
+expo install expo-app-loading
+expo install expo-font
+expo install expo-asset
+npm install @react-navigation/native
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+npm install @react-navigation/stack
+expo install react-native-appearance
+npm install react-hook-form
+npm install @apollo/client graphql
+npm install @react-navigation/bottom-tabs
+expo install @react-native-async-storage/async-storage
