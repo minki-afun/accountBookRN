@@ -2,9 +2,9 @@ import React from "react"
 import { View, Text, ActivityIndicator } from "react-native"
 import styled from "styled-components/native"
 
-const ButtonTemp = ({ onPress, text, loading }) => {
+const ButtonTemp = ({ onPress, disabled, text, loading }) => {
   return (
-    <Button onPress={onPress}>
+    <Button disabled={disabled} onPress={onPress}>
       <ButtonText>{text}</ButtonText>
     </Button>
   )
@@ -19,6 +19,7 @@ const Button = styled.TouchableOpacity`
   width: 60%;
   padding: 15px 10px;
   border-radius: 7px;
+  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
 `
 
 const ButtonText = styled.Text`

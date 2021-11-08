@@ -8,6 +8,7 @@ import client, { isLoggedInVar, tokenVar } from "./apollo"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { Asset } from "expo-asset"
 import LogoutNav from "./navigators/LogoutNav"
+import LoginNav from "./navigators/LoginNav"
 
 export default function App() {
   // 로그인 인지 확인
@@ -47,8 +48,7 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
-        {/* {isLoggedIn ? <LoginNav /> : <LogoutNav />} */}
-        <LogoutNav />
+        {isLoggedIn ? <LoginNav /> : <LogoutNav />}
       </NavigationContainer>
     </ApolloProvider>
   )
