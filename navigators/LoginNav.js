@@ -38,7 +38,7 @@ const LoginNav = () => {
 export default LoginNav
 
 const ButtonView = styled.TouchableOpacity`
-  background-color: orange;
+  background-color: rgba(50, 80, 170, 0.3);
   padding: 15px 7px;
   width: 80px;
   border-radius: 10px;
@@ -47,6 +47,7 @@ const ButtonView = styled.TouchableOpacity`
 const ButtonText = styled.Text`
   font-weight: 800;
   text-align: center;
+  color: white;
 `
 const ImageDiv = styled.Image`
   width: 40px;
