@@ -14,10 +14,10 @@ const LOOK_BALANCE = gql`
 `
 
 const Balance = ({ userId }) => {
+  // apollo useQuery 보기
   const { loading, error, data } = useQuery(LOOK_BALANCE, {
     variables: { userId },
   })
-  console.log(data)
   return (
     <BalanceView>
       <TitleText>누적잔액</TitleText>

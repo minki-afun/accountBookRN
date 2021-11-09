@@ -16,6 +16,7 @@ const USER_DATA = gql`
 `
 
 const User = () => {
+  // apollo useQuery보기
   const { loading, error, data } = useQuery(USER_DATA, {
     variables: { id: tokenDecodeId() },
   })
