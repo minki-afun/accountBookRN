@@ -42,10 +42,12 @@ export const getTokenDecode = async () => {
   tokenDecodeId(jwt_decode(token).id)
 }
 
+// apollo 서버 연결 URL
 const httpLink = createHttpLink({
   uri: "http://localhost:4000/graphql",
 })
 
+// 헤더에 token값 넣기
 const authLink = setContext((_, { headers }) => {
   return {
     headers: {

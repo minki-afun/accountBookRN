@@ -1,9 +1,17 @@
 import { gql, useQuery } from "@apollo/client"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import React, { useEffect, useState } from "react"
-import { View, Text, Button, TouchableOpacity, Image } from "react-native"
+import {
+  View,
+  Text,
+  Button,
+  TouchableOpacity,
+  Image,
+  Modal,
+} from "react-native"
 import { isLoggedInVar, logUserOut, tokenDecodeId, tokenVar } from "../apollo"
 import styled from "styled-components/native"
+import Balance from "../components/Balance"
 
 const USER_DATA = gql`
   query userData($id: Int!) {
@@ -15,6 +23,7 @@ const USER_DATA = gql`
 `
 
 const User = () => {
+  // apollo useQuery보기
   const { loading, error, data } = useQuery(USER_DATA, {
     variables: { id: tokenDecodeId() },
   })
@@ -26,17 +35,20 @@ const User = () => {
       </Container>
     )
   }
-  console.log(data)
+
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Text style={{ color: "black" }}>1</Text>
-    </View>
+    <ViewContainer>
+      <BoxView>
+        <BoxDiv>{data?.userData.email}</BoxDiv>
+        <BoxDiv>환영합니다</BoxDiv>
+      </BoxView>
+      <Balance userId={tokenDecodeId()} />
+      <View>
+        <Modal>
+          <View></View>
+        </Modal>
+      </View>
+    </ViewContainer>
   )
 }
 
@@ -50,4 +62,25 @@ const Container = styled.View`
 const ImageStyle = styled.Image`
   width: 150px;
   height: 150px;
+`
+
+const ViewContainer = styled.View`
+  flex: 1;
+  margin-top: 25%;
+  padding: 10px 10px;
+`
+const BoxView = styled.View`
+  background-color: rgba(50, 80, 170, 0.3);
+  width: 100%;
+  height: 120px;
+  border-radius: 20px;
+  padding: 10px 10px;
+  align-items: center;
+  justify-content: center;
+`
+const BoxDiv = styled.Text`
+  color: white;
+  font-weight: 800;
+  font-size: 35px;
+  text-align: left;
 `
