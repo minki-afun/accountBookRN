@@ -1,7 +1,14 @@
 import { gql, useQuery } from "@apollo/client"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import React, { useEffect, useState } from "react"
-import { View, Text, Button, TouchableOpacity, Image } from "react-native"
+import {
+  View,
+  Text,
+  Button,
+  TouchableOpacity,
+  Image,
+  Modal,
+} from "react-native"
 import { isLoggedInVar, logUserOut, tokenDecodeId, tokenVar } from "../apollo"
 import styled from "styled-components/native"
 import Balance from "../components/Balance"
@@ -28,7 +35,7 @@ const User = () => {
       </Container>
     )
   }
-  console.log(data)
+
   return (
     <ViewContainer>
       <BoxView>
@@ -36,6 +43,11 @@ const User = () => {
         <BoxDiv>환영합니다</BoxDiv>
       </BoxView>
       <Balance userId={tokenDecodeId()} />
+      <View>
+        <Modal>
+          <View></View>
+        </Modal>
+      </View>
     </ViewContainer>
   )
 }
