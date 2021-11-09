@@ -1,21 +1,50 @@
+
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import React, { useEffect, useState } from "react"
 import { View, Text, Button } from "react-native"
 import { isLoggedInVar, logUserOut, tokenVar } from "../apollo"
+import styled from "styled-components"
+import ContentLayout from "../components/main/ContentLayout"
+import { gql, useMutation, useQuery } from "@apollo/client"
 
-const Content = () => {
+// query 연결
+const CONTENT_QUERY = gql`
+  query seeContents($id: Int!) {
+  seeContents(id:$id){
+    product
+    price
+    sign
+    date
+    total
+    plusTotal
+    minusTotal
+  }
+}
+`
+
+const Content = () => { 
+  const {loading, error, data} = useQuery(CONTENT_QUERY,{
+    variables: {
+      id: 2
+    }
+  });
+  
+  console.log("===============")
+  console.log(loading);
+  console.log(error);
+  console.log(data);
+  console.log("===============")
+  
+  // let test = ``;
+  // if(seeContents(id)){
+  // test = product.seeContents.map((item, index) => {
+  //   <Text key={index}>{item.id} / {item.product}</Text>
+  // })
+  // }
   return (
-    <View
-      style={{
-        backgroundColor: "black",
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Text style={{ color: "white" }}>Content</Text>
-      {/* <Button title="LogOut" onPress={logUserOut()} /> */}
-    </View>
+    <ContentLayout>
+      {/* {test} */}
+    </ContentLayout>
   )
 }
 
