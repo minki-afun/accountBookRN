@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   Modal,
+  ScrollView,
 } from "react-native"
 import { isLoggedInVar, logUserOut, tokenDecodeId, tokenVar } from "../apollo"
 import styled from "styled-components/native"
@@ -43,11 +44,6 @@ const User = () => {
         <BoxDiv>환영합니다</BoxDiv>
       </BoxView>
       <Balance userId={tokenDecodeId()} />
-      <View>
-        <Modal>
-          <View></View>
-        </Modal>
-      </View>
     </ViewContainer>
   )
 }
@@ -66,8 +62,8 @@ const ImageStyle = styled.Image`
 
 const ViewContainer = styled.View`
   flex: 1;
-  margin-top: 25%;
   padding: 10px 10px;
+  background-color: white;
 `
 const BoxView = styled.View`
   background-color: rgba(50, 80, 170, 0.3);
@@ -77,6 +73,7 @@ const BoxView = styled.View`
   padding: 10px 10px;
   align-items: center;
   justify-content: center;
+  margin-top: 25%;
 `
 const BoxDiv = styled.Text`
   color: white;

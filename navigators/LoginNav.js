@@ -5,6 +5,7 @@ import User from "../screens/User"
 import { logUserOut } from "../apollo"
 import styled from "styled-components/native"
 import { Text, View, Image } from "react-native"
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
 
 const Tabs = createBottomTabNavigator()
 
@@ -12,17 +13,38 @@ const LoginNav = () => {
   return (
     <Tabs.Navigator
       screenOptions={{
+        tabBarActiveTintColor: "black",
         headerTitle: "",
         headerTransparent: true,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          // borderTopColor: "gray",
+        },
       }}
     >
-      <Tabs.Screen name="Content" component={Content} />
+      <Tabs.Screen
+        name="Content"
+        component={Content}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <MaterialCommunityIcons
+              name={focused ? "notebook" : "notebook-outline"}
+              size={focused ? 30 : 25}
+              color={color}
+            />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="User"
         component={User}
         options={{
-          tabBarIcon: ({ color }) => (
-            <ImageDiv source={require("../assets/icon1.png")} />
+          tabBarIcon: ({ focused, color, size }) => (
+            <Ionicons
+              name={focused ? "person" : "person-outline"}
+              color={color}
+              size={focused ? 30 : 20}
+            />
           ),
           headerRight: () => (
             <ButtonView onPress={() => logUserOut()}>
