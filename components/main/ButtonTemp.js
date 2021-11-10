@@ -13,7 +13,7 @@ const ButtonTemp = ({ onPress, disabled, text, loading }) => {
 export default ButtonTemp
 
 const Button = styled.TouchableOpacity`
-  background-color: rosybrown;
+  background-color: lightsteelblue;
   padding: 15px 10px;
   margin-top: 20px;
   width: 60%;

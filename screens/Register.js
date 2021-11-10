@@ -1,7 +1,7 @@
-import { gql, useMutation } from "@apollo/client"
-import React, { useEffect, useRef } from "react"
+import { gql, useMutation, useQuery, useLazyQuery } from "@apollo/client"
+import React, { useEffect, useRef, useState } from "react"
 import { useForm, useWatch } from "react-hook-form"
-import { Text, View } from "react-native"
+import { Text, View, TouchableOpacity } from "react-native"
 import styled from "styled-components/native"
 import ButtonTemp from "../components/main/ButtonTemp"
 import LogoLayout from "../components/main/LogoLayout"
@@ -9,6 +9,15 @@ import LogoLayout from "../components/main/LogoLayout"
 const CREATE_ACCOUNT_MUTATION = gql`
   mutation createAccount($email: String!, $password: String!) {
     createAccount(email: $email, password: $password) {
+      result
+      error
+    }
+  }
+`
+
+const CHECKING_ID = gql`
+  query checkIdExist($email: String!) {
+    checkIdExist(email: $email) {
       result
       error
     }
@@ -65,6 +74,10 @@ const Register = ({ navigation }) => {
     })
   }, [register])
 
+  const [getDog, { data }] = useLazyQuery(CHECKING_ID, {
+    variables: { email: watch("email") },
+  })
+
   return (
     <LogoLayout>
       <TextInput
@@ -74,7 +87,10 @@ const Register = ({ navigation }) => {
         returnKeyType="next"
         autoCapitalize="none"
         onSubmitEditing={() => onNext(passwordRef)}
-        onChangeText={(text) => setValue("email", text)}
+        onChangeText={(text) => {
+          setValue("email", text)
+          getDog()
+        }}
       />
       <TextInput
         value={watch("password")}
@@ -87,8 +103,10 @@ const Register = ({ navigation }) => {
         onSubmitEditing={handleSubmit(onData)}
         onChangeText={(text) => setValue("password", text)}
       />
+      <TextShow>{data?.checkIdExist.error}</TextShow>
+
       <ButtonTemp
-        text="register"
+        text="회원가입"
         disabled={!watch("email") || !watch("password")}
         onPress={handleSubmit(onData)}
       />
@@ -106,6 +124,10 @@ const TextInput = styled.TextInput`
   font-size: 15px;
   font-weight: 800;
   margin-bottom: ${(props) => (props.lastOne ? 15 : 8)}px;
-  background-color: rgba(250, 150, 100, 0.3);
+  background-color: rgba(50, 120, 200, 0.3);
   color: rgba(0, 0, 0, 0.6);
+`
+const TextShow = styled.Text`
+  font-size: 15px;
+  font-weight: 800;
 `

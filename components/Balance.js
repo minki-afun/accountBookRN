@@ -52,14 +52,14 @@ const TitleText = styled.Text`
 
 const TitleTextDiv = styled.Text`
   color: white;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 30px;
   margin-bottom: 5px;
 `
 
 const TextBody = styled.Text`
   color: white;
-  font-weight: 800;
+  font-weight: 500;
   font-size: 25px;
   text-align: right;
   padding-right: 10px;

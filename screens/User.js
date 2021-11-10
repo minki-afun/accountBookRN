@@ -41,7 +41,7 @@ const User = () => {
     <ViewContainer>
       <BoxView>
         <BoxDiv>{data?.userData.email}</BoxDiv>
-        <BoxDiv>환영합니다</BoxDiv>
+        <BoxDiv2>환영합니다</BoxDiv2>
       </BoxView>
       <Balance userId={tokenDecodeId()} />
     </ViewContainer>
@@ -78,6 +78,11 @@ const BoxView = styled.View`
 const BoxDiv = styled.Text`
   color: white;
   font-weight: 800;
+  font-size: 35px;
+  text-align: left;
+`
+const BoxDiv2 = styled.Text`
+  color: white;
   font-size: 35px;
   text-align: left;
 `

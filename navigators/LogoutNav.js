@@ -25,7 +25,7 @@ const LogoutNav = ({ navigation }) => {
         options={{
           headerBackTitleVisible: false,
           headerShown: true,
-          headerTintColor: "rosybrown",
+          headerTintColor: "lightsteelblue",
         }}
       />
       <Stack.Screen
@@ -34,7 +34,7 @@ const LogoutNav = ({ navigation }) => {
         options={{
           headerBackTitleVisible: false,
           headerShown: true,
-          headerTintColor: "rosybrown",
+          headerTintColor: "lightsteelblue",
         }}
       />
     </Stack.Navigator>

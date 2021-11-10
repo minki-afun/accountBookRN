@@ -90,7 +90,7 @@ const Login = ({ route: { params } }) => {
         onChangeText={(text) => setValue("password", text)}
       />
       <ButtonTemp
-        text="Login"
+        text="로그인"
         disabled={!watch("email") || !watch("password")}
         onPress={handleSubmit(onData)}
       />
