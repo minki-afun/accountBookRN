@@ -3,11 +3,15 @@ import ContentLayout from "../components/main/ContentLayout"
 import { gql, useQuery } from "@apollo/client"
 import {userId} from "../screens/User"
 import { tokenDecodeId } from "../apollo"
+import { FlatList, Text, TouchableOpacity, View } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
+import styled from "styled-components"
 
 // query 연결
 const CONTENT_QUERY = gql`
   query seeContents($userId: Int!) {
   seeContents(userId:$userId){
+    id
     product
     price
     sign
@@ -18,22 +22,94 @@ const CONTENT_QUERY = gql`
   }
 }
 `
-const Content = ({userId}) => {
 
+const Content = () => {
   const {loading, error, data} = useQuery(CONTENT_QUERY,{
-  
+    variables:{userId: tokenDecodeId()},
   });
-  console.log("===============")
-  console.log(data) 
- 
-  console.log("===============")
-  
+  // console.log(data)
+  if (loading) {
+    return (
+      <View>
+        <Text>"Loading..."</Text>  
+      </View>
+    )
+  }
+  if(error){
+    <View>
+      <Text>"ERROR"</Text>
+    </View>
+  }
+  const renderContents = ({item}) => (
+    <DataContainer>
+      <DataTouchable>
+        <DataWrapper>
+          <DataSub>{item.date}</DataSub>
+          <DataSub>{item.product}</DataSub>
+          <DataSub>{item.price}</DataSub>
+        </DataWrapper>
+      </DataTouchable>
+    </DataContainer>
+  )
   
   return (
+    
     <ContentLayout>
+    <SafeAreaView>
+      <FlatList
+        ListHeaderComponent={
+          <DataWrapper>
+            <DataTitle>날짜</DataTitle>
+            <DataTitle>목록</DataTitle>
+            <DataTitle>금액</DataTitle>
+          </DataWrapper>
+        }
+        data={data?.seeContents}
+        renderItem={renderContents}
+        keyExtractor={(data)=>data?.id}
+        
+        />
 
-    </ContentLayout>
+    </SafeAreaView>
+        </ContentLayout>
+    
   )
 }
 
 export default Content
+
+const DataContainer = styled.View`
+  margin-top: 5px;
+  display:flex;
+  text-align:right;
+  flex-direction:column;
+  `
+const DataWrapper = styled.View`
+  flex-direction:row;
+  justify-content:space-around;
+  text-align:right;
+  
+`
+const DataTouchable = styled.TouchableOpacity`
+  text-align:right;
+  border-top-color: #B9B7BD;
+  border-top-width: 1px;
+  &:last-child{
+    border-bottom-color: #B9B7BD;
+    border-bottom-width: 1px;
+  }
+  margin-bottom: 2px;
+  padding-top:2px;
+
+  `
+const DataTitle = styled.Text`
+  text-align:right;
+  font-size: 18px;
+  font-weight:bold;
+  margin: 0 15px 15px 15px;
+  `
+const DataSub = styled.Text`
+  margin: 5px 15px 5px 10px;
+  font-size: 18px;
+  text-align:right;
+  `
