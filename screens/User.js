@@ -7,13 +7,13 @@ import {
   Button,
   TouchableOpacity,
   Image,
-  Modal,
   ScrollView,
   Alert,
 } from "react-native"
 import { isLoggedInVar, logUserOut, tokenDecodeId, tokenVar } from "../apollo"
 import styled from "styled-components/native"
 import Balance from "../components/Balance"
+import Wrapper from "../components/Wrapper"
 
 const USER_DATA = gql`
   query userData($id: Int!) {
@@ -25,8 +25,6 @@ const USER_DATA = gql`
 `
 
 const User = () => {
-  // modal 확인
-  const [modalVisible, setModalVisible] = useState(false)
   // apollo useQuery보기
   const { loading, error, data } = useQuery(USER_DATA, {
     variables: { id: tokenDecodeId() },
@@ -47,22 +45,7 @@ const User = () => {
         <BoxDiv2>환영합니다</BoxDiv2>
       </BoxView>
       <Balance userId={tokenDecodeId()} />
-      <Button title="hi" onPress={() => setModalVisible(!modalVisible)} />
-      <View>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal Close")
-          }}
-          onPress={() => setModalVisible(!modalVisible)}
-        >
-          <ModalView>
-            <Text>hi</Text>
-          </ModalView>
-        </Modal>
-      </View>
+      <Wrapper />
     </ViewContainer>
   )
 }
@@ -107,5 +90,10 @@ const BoxDiv2 = styled.Text`
 `
 
 const ModalView = styled.View`
+  flex-direction: column;
   align-items: center;
+  width: 320px;
+  height: 220px;
+  background-color: blue;
+  border-radius: 10px;
 `

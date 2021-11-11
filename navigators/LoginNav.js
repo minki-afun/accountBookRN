@@ -33,7 +33,7 @@ const LoginNav = () => {
           tabBarIcon: ({ focused, color, size }) => (
             <MaterialCommunityIcons
               name={focused ? "notebook" : "notebook-outline"}
-              size={focused ? 30 : 25}
+              size={focused ? 30 : 28}
               color={color}
             />
           ),
@@ -47,7 +47,7 @@ const LoginNav = () => {
             <Ionicons
               name={focused ? "person" : "person-outline"}
               color={color}
-              size={focused ? 30 : 20}
+              size={focused ? 30 : 28}
             />
           ),
           headerRight: () => (

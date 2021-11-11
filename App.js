@@ -9,6 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import { Asset } from "expo-asset"
 import LogoutNav from "./navigators/LogoutNav"
 import LoginNav from "./navigators/LoginNav"
+import { ModalPortal } from "react-native-modals"
 
 export default function App() {
   // 로그인 인지 확인
@@ -49,6 +50,7 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
         {isLoggedIn ? <LoginNav /> : <LogoutNav />}
+        <ModalPortal />
       </NavigationContainer>
     </ApolloProvider>
   )
