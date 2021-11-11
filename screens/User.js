@@ -43,11 +43,11 @@ const User = () => {
         <BoxDiv>환영합니다</BoxDiv>
       </BoxView>
       <Balance userId={tokenDecodeId()} />
-      <View>
+      {/* <View>
         <Modal>
           <View></View>
         </Modal>
-      </View>
+      </View> */}
     </ViewContainer>
   )
 }

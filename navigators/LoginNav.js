@@ -5,6 +5,7 @@ import User from "../screens/User"
 import { logUserOut } from "../apollo"
 import styled from "styled-components/native"
 import { Text, View, Image } from "react-native"
+import CreateContent from "../components/CreateContent"
 
 const Tabs = createBottomTabNavigator()
 
