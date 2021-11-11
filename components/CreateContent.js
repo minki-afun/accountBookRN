@@ -1,11 +1,11 @@
-import { useMutation } from "@apollo/client"
-import gql from "graphql-tag"
+import { gql, useMutation } from "@apollo/client"
 import React, { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
-import { View, Text } from "react-native"
+import { View, Text, Button } from "react-native"
+import ButtonTemp from "./main/ButtonTemp"
 
-CREATE_CONTENT_MUTATION = gql`
+const CREATE_CONTENT_MUTATION = gql`
   mutation addContents(
     $product: String!
     $price: Int!
@@ -35,7 +35,7 @@ const CreateContent = ({ navigation }) => {
     const {
       addContents: { result, error },
     } = data
-    const { product, price, text, date, sign, userId } = watch()
+    // const { product, price, text, date, sign, userId } = watch()
     if (result) {
       navigation.navigate("Content")
     } else {
@@ -48,8 +48,9 @@ const CreateContent = ({ navigation }) => {
     {
       onCompleted,
     }
-  )
-  const submitData = (data) => {
+    )
+    const submitData = (data) => {
+      console.log('tttt')
     if (!loading) {
       createContentMutation({
         variables: {
@@ -83,34 +84,112 @@ const CreateContent = ({ navigation }) => {
   return (
     <AddContainer>
       <AddContentText
+        value={watch("date")}
+        placeholder="거래 날짜"
+        placeholderTextColor="rgba(0,0,0,0.6)"
+        returnKeyType="next"
+        autoCapitalize="none"
+        onChangeText={(text) => setValue("date", text)}
+      />
+      <AddContentText
         value={watch("product")}
         placeholder="표기될 거래 내용명"
         placeholderTextColor="rgba(0,0,0,0.6)"
         returnKeyType="next"
         autoCapitalize="none"
-        onSubmitEditing={handleSubmit(submitData)}
         onChangeText={(text) => setValue("product", text)}
       />
+      <AddContentText
+        value={watch("price")}
+        placeholder="금액"
+        placeholderTextColor="rgba(0,0,0,0.6)"
+        returnKeyType="next"
+        autoCapitalize="none"
+        onChangeText={(text) => setValue("price", text)}
+      />
+      <AddContentSub
+        value={watch("text")}
+        placeholder="거래 내용"
+        placeholderTextColor="rgba(0,0,0,0.6)"
+        returnKeyType="next"
+        autoCapitalize="none"
+        onChangeText={(text) => setValue("text", text)}
+      />
+      <BtnWrapper>
+        <BtnClose onPress={()=> navigation.navigate("Content")}>
+          <BtnText>Close</BtnText>
+        </BtnClose>
+        <ButtonTemp 
+          text="Submit"
+          onPress={handleSubmit(submitData)}
+        />
+        {/* <BtnSubmit
+          onPress={handleSubmit(submitData)}
+        >
+          <BtnText>Submit</BtnText>
+        </BtnSubmit> */}
+      </BtnWrapper>
     </AddContainer>
   )
-  // return (
-  //   <View>
-  //     <Text>Hi</Text>
-  //   </View>
-  // )
 }
 
 export default CreateContent
 
-const AddContainer = styled.View``
+const AddContainer = styled.View`
+  justify-content: center;
+  text-align:center;
+  margin:auto;
+`
 const AddContentText = styled.TextInput`
-  width: 60%;
+
+  padding: 15px 7px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: ${(props) => (props.lastOne ? 15 : 8)}px;
+  background-color: #D4F1F4;
+  color: rgba(0, 0, 0, 0.6);
+  height:40px;
+  border-width:1px;
+  width:250px;
+  text-align:center;
+  padding:10px;
+  
+`
+const AddContentSub = styled.TextInput`
   padding: 15px 7px;
   margin-bottom: 8px;
   border-radius: 5px;
   font-size: 15px;
   font-weight: 800;
   margin-bottom: ${(props) => (props.lastOne ? 15 : 8)}px;
-  background-color: rgba(250, 150, 100, 0.3);
+  background-color: #D4F1F4;
   color: rgba(0, 0, 0, 0.6);
+  height:300px;
+  border-width:1px;
+  width:250px;
+  text-align:center;
 `
+const BtnSubmit = styled.TouchableOpacity`
+  background-color: #75E6DA;
+  padding: 15px 7px;
+  width: 100px;
+  border-radius: 10px;
+`
+const BtnClose = styled.TouchableOpacity`
+  background-color: #4C5270;
+  padding: 15px 7px;
+  width: 100px;
+  border-radius: 10px;
+  `
+  const BtnText = styled.Text`
+  font-weight: bold;
+  text-align:center;
+  color:#fff;
+  font-size:20px;
+  `
+const BtnWrapper = styled.View`
+  flex-direction:row;
+  justify-content:space-around;
+  `
