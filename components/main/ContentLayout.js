@@ -4,7 +4,7 @@ import { View, Text, Button } from "react-native"
 import { isLoggedInVar, logUserOut, tokenVar } from "../../apollo"
 import styled from "styled-components/native"
 import { tokenDecodeId } from "../../apollo"
-import {gql, useQuery} from "@apollo/client"
+import { gql, useQuery } from "@apollo/client"
 import CreateContent from "../CreateContent"
 
 const LOOK_BALANCE = gql`
@@ -17,11 +17,10 @@ const LOOK_BALANCE = gql`
   }
 `
 
-
-function ContentLayout({children, navigation}) {
-   // apollo useQuery 보기
-   const { loading, error, data } = useQuery(LOOK_BALANCE, {
-    variables: { userId : tokenDecodeId() },
+function ContentLayout({ children, goContentDetail }) {
+  // apollo useQuery 보기
+  const { loading, error, data } = useQuery(LOOK_BALANCE, {
+    variables: { userId: tokenDecodeId() },
   })
   return (
     <Container>
@@ -48,9 +47,9 @@ function ContentLayout({children, navigation}) {
         </WrapperInner>
       </Wrapper>
       <Card>
-      {children}
+        {children}
         <TotalPrice>합계 : {data?.seeBalance.total}</TotalPrice>
-        <AddButton title="가계부 등록" onPress={() => navigation.navigate("CreateContent")}></AddButton>
+        {/* <AddButton title="가계부 등록" onPress={goContentDetail}></AddButton> */}
       </Card>
     </Container>
   )
