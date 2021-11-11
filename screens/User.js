@@ -9,6 +9,7 @@ import {
   Image,
   Modal,
   ScrollView,
+  Alert,
 } from "react-native"
 import { isLoggedInVar, logUserOut, tokenDecodeId, tokenVar } from "../apollo"
 import styled from "styled-components/native"
@@ -24,18 +25,20 @@ const USER_DATA = gql`
 `
 
 const User = () => {
+  // modal 확인
+  const [modalVisible, setModalVisible] = useState(false)
   // apollo useQuery보기
   const { loading, error, data } = useQuery(USER_DATA, {
     variables: { id: tokenDecodeId() },
   })
   // if (error) console.log(error)
-  if (loading) {
-    return (
-      <Container>
-        <ImageStyle source={require("../assets/cat.gif")} />
-      </Container>
-    )
-  }
+  // if (loading) {
+  //   return (
+  //     <Container>
+  //       <ImageStyle source={require("../assets/cat.gif")} />
+  //     </Container>
+  //   )
+  // }
 
   return (
     <ViewContainer>
@@ -44,6 +47,22 @@ const User = () => {
         <BoxDiv2>환영합니다</BoxDiv2>
       </BoxView>
       <Balance userId={tokenDecodeId()} />
+      <Button title="hi" onPress={() => setModalVisible(!modalVisible)} />
+      <View>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal Close")
+          }}
+          onPress={() => setModalVisible(!modalVisible)}
+        >
+          <ModalView>
+            <Text>hi</Text>
+          </ModalView>
+        </Modal>
+      </View>
     </ViewContainer>
   )
 }
@@ -85,4 +104,8 @@ const BoxDiv2 = styled.Text`
   color: white;
   font-size: 35px;
   text-align: left;
+`
+
+const ModalView = styled.View`
+  align-items: center;
 `

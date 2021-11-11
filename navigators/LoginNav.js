@@ -6,8 +6,10 @@ import { logUserOut } from "../apollo"
 import styled from "styled-components/native"
 import { Text, View, Image } from "react-native"
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
+import { createStackNavigator } from "@react-navigation/stack"
 
 const Tabs = createBottomTabNavigator()
+const Stack = createStackNavigator()
 
 const LoginNav = () => {
   return (
