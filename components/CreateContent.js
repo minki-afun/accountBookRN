@@ -10,17 +10,13 @@ const CREATE_CONTENT_MUTATION = gql`
     $product: String!
     $price: Int!
     $text: String
-    $date: Int!
-    $sign: Boolean
-    $userId: Int
+    $date: Int! # $sign: Boolean # $userId: Int
   ) {
     addContents(
       product: $product
       price: $price
       text: $text
-      date: $date
-      sign: $sign
-      userId: $userId
+      date: $date # sign: $sign # userId: $userId
     ) {
       result
       error
@@ -32,9 +28,11 @@ const CreateContent = ({ navigation }) => {
   const { register, handleSubmit, setValue, watch } = useForm()
   // 제출 후 데이터 결과 및 처리과정
   const onCompleted = (data) => {
+    console.log(data)
     const {
       addContents: { result, error },
     } = data
+    console.log("area2")
     // const { product, price, text, date, sign, userId } = watch()
     if (result) {
       navigation.navigate("Content")
@@ -48,47 +46,48 @@ const CreateContent = ({ navigation }) => {
     {
       onCompleted,
     }
-    )
-    const submitData = (data) => {
-      if (!loading) {
-        console.log('tttt')
-        createContentMutation({
-          variables: {
-            ...data,
-          },
-        })
-      }
+  )
+  const submitData = (data) => {
+    console.log(data)
+    if (!loading) {
+      createContentMutation({
+        variables: {
+          ...data,
+        },
+      })
     }
-    // 필수 항목 표시
-    useEffect(() => {
-      register("product", {
-        required: true,
-      })
-      register("price", {
-        required: true,
-      })
-      register("date", {
-        required: true,
-      })
-      register("text", {
-        required: false,
-      })
-      register("sign", {
-        required: false,
-      })
-      register("userId", {
-        required: false,
-      })
-    }, [register])
-    
-    return (
-      <AddContainer>
+  }
+  // 필수 항목 표시
+  useEffect(() => {
+    register("product", {
+      required: true,
+    })
+    register("price", {
+      required: true,
+    })
+    register("date", {
+      required: true,
+    })
+    register("text", {
+      required: false,
+    })
+    register("sign", {
+      required: false,
+    })
+    register("userId", {
+      required: false,
+    })
+  }, [register])
+
+  return (
+    <AddContainer>
       <AddContentText
         value={watch("date")}
         placeholder="거래 날짜"
         placeholderTextColor="rgba(0,0,0,0.6)"
         returnKeyType="next"
         autoCapitalize="none"
+        keyboardType="numeric"
         onChangeText={(text) => setValue("date", text)}
       />
       <AddContentText
@@ -105,6 +104,7 @@ const CreateContent = ({ navigation }) => {
         placeholderTextColor="rgba(0,0,0,0.6)"
         returnKeyType="next"
         autoCapitalize="none"
+        keyboardType="numeric"
         onChangeText={(text) => setValue("price", text)}
       />
       <AddContentSub
@@ -116,16 +116,15 @@ const CreateContent = ({ navigation }) => {
         onChangeText={(text) => setValue("text", text)}
       />
       <BtnWrapper>
-        <BtnClose onPress={()=> navigation.navigate("Content")}>
+        <BtnClose onPress={() => navigation.navigate("Content")}>
           <BtnText>Close</BtnText>
         </BtnClose>
         {/* <ButtonTemp 
           text="Submit"
+          disabled={false}
           onPress={handleSubmit(submitData)}
         /> */}
-        <BtnSubmit
-          onPress={handleSubmit(submitData)}
-        >
+        <BtnSubmit onPress={handleSubmit(submitData)}>
           <BtnText>Submit</BtnText>
         </BtnSubmit>
       </BtnWrapper>
@@ -137,25 +136,23 @@ export default CreateContent
 
 const AddContainer = styled.View`
   justify-content: center;
-  text-align:center;
-  margin:auto;
+  text-align: center;
+  margin: auto;
 `
 const AddContentText = styled.TextInput`
-
   padding: 15px 7px;
   margin-bottom: 10px;
   border-radius: 5px;
   font-size: 15px;
   font-weight: 800;
   margin-bottom: ${(props) => (props.lastOne ? 15 : 8)}px;
-  background-color: #D4F1F4;
+  background-color: #d4f1f4;
   color: rgba(0, 0, 0, 0.6);
-  height:40px;
-  border-width:1px;
-  width:250px;
-  text-align:center;
-  padding:10px;
-  
+  height: 40px;
+  border-width: 1px;
+  width: 250px;
+  text-align: center;
+  padding: 10px;
 `
 const AddContentSub = styled.TextInput`
   padding: 15px 7px;
@@ -164,32 +161,32 @@ const AddContentSub = styled.TextInput`
   font-size: 15px;
   font-weight: 800;
   margin-bottom: ${(props) => (props.lastOne ? 15 : 8)}px;
-  background-color: #D4F1F4;
+  background-color: #d4f1f4;
   color: rgba(0, 0, 0, 0.6);
-  height:300px;
-  border-width:1px;
-  width:250px;
-  text-align:center;
+  height: 300px;
+  border-width: 1px;
+  width: 250px;
+  text-align: center;
 `
 const BtnSubmit = styled.TouchableOpacity`
-  background-color: #75E6DA;
+  background-color: #75e6da;
   padding: 15px 7px;
   width: 100px;
   border-radius: 10px;
 `
 const BtnClose = styled.TouchableOpacity`
-  background-color: #4C5270;
+  background-color: #4c5270;
   padding: 15px 7px;
   width: 100px;
   border-radius: 10px;
-  `
-  const BtnText = styled.Text`
+`
+const BtnText = styled.Text`
   font-weight: bold;
-  text-align:center;
-  color:#fff;
-  font-size:20px;
-  `
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+`
 const BtnWrapper = styled.View`
-  flex-direction:row;
-  justify-content:space-around;
-  `
+  flex-direction: row;
+  justify-content: space-around;
+`

@@ -27,7 +27,7 @@ const LoginNav = () => {
       }}
     >
       <Tabs.Screen
-        name="Content"
+        name="Contents"
         component={ContentNav}
         options={{
           tabBarIcon: ({ focused, color, size }) => (

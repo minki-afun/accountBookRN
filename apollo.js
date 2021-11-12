@@ -6,7 +6,6 @@ import {
   makeVar,
   split,
 } from "@apollo/client"
-import { onError } from "@apollo/client/link/error"
 import { setContext } from "@apollo/client/link/context"
 import {
   getMainDefinition,
@@ -14,6 +13,12 @@ import {
 } from "@apollo/client/utilities"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { createUploadLink } from "apollo-upload-client"
+import { ApolloLink } from "apollo-boost"
+import { onError } from "apollo-link-error"
+
+const errorLink = onError(({ graphQLErrors }) => {
+  if (graphQLErrors) graphQLErrors.map(({ message }) => console.log(message))
+})
 
 export const isLoggedInVar = makeVar(false)
 export const tokenVar = makeVar("")
@@ -59,7 +64,8 @@ const authLink = setContext((_, { headers }) => {
 
 // 아폴로 연결
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  // link: authLink.concat(httpLink),
+  link: ApolloLink.from([errorLink, authLink, httpLink]),
   cache: new InMemoryCache(),
 })
 

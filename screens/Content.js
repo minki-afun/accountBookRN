@@ -41,11 +41,13 @@ const Content = ({ navigation }) => {
       </View>
     )
   }
-  if (error) {
-    <View>
-      <Text>"ERROR"</Text>
-    </View>
-  }
+  // if (error) {
+  //   return (
+  //     <View>
+  //       <Text>"ERROR"</Text>
+  //     </View>
+  //   )
+  // }
   // const renderContents = ({ item }) => (
 
   //   <DataContainer>
@@ -73,10 +75,8 @@ const Content = ({ navigation }) => {
             </DataWrapper>
           }
           data={data?.seeContents}
-          renderItem={({item}) => {
-            return (
-              <ListItem item={item} navigation={navigation}/>
-            )
+          renderItem={({ item }) => {
+            return <ListItem item={item} navigation={navigation} />
           }}
           // renderItem={renderContents}
           keyExtractor={(data) => data?.id}

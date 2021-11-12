@@ -15,6 +15,8 @@
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
     "accordion-collapse-react-native": "^1.1.0",
+    "apollo-boost": "^0.4.9",
+    "apollo-link-error": "^1.1.13",
     "apollo-upload-client": "^16.0.0",
     "expo": "~43.0.0",
     "expo-app-loading": "~1.2.1",
