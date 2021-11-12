@@ -40,10 +40,6 @@ const DataTouchable = styled.TouchableOpacity`
   text-align: right;
   border-top-color: #b9b7bd;
   border-top-width: 1px;
-  &:last-child {
-    border-bottom-color: #b9b7bd;
-    border-bottom-width: 1px;
-  }
   margin-bottom: 2px;
   padding-top: 2px;
 `

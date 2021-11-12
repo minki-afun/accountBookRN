@@ -67,49 +67,116 @@ const CreateContents = ({ navigation }) => {
     }
   }
   return (
-    <Views>
-      <TextInput
-        value={watch("product")}
-        placeholder="Product"
-        autoCapitalize="none"
-        onChangeText={(text) => setValue("product", text)}
-      />
-      <TextInput
+    <AddContainer>
+      <AddContentText
         value={watch("date")}
-        placeholder="Date"
+        placeholder="거래 날짜"
         autoCapitalize="none"
         onChangeText={(text) => setValue("date", text)}
       />
-      <TextInput
+      <AddContentText
+        value={watch("product")}
+        placeholder="표기될 거래 내용명"
+        autoCapitalize="none"
+        onChangeText={(text) => setValue("product", text)}
+      />
+      <AddContentText
         value={watch("price")}
-        placeholder="Price"
+        placeholder="금액"
         autoCapitalize="none"
         onChangeText={(text) => setValue("price", text)}
       />
-      <TextInput
+      <AddContentSub
         value={watch("text")}
-        placeholder="Text"
+        placeholder="거래 내용"
         autoCapitalize="none"
         onChangeText={(text) => setValue("text", text)}
       />
-      <ButtonTemp text="제출" disabled={false} onPress={handleSubmit(onData)} />
-    </Views>
+      <BtnWrapper>
+        <BtnClose onPress={() => navigation.navigate("Content")}>
+          <BtnText>Close</BtnText>
+        </BtnClose>
+        <BtnSubmit onPress={handleSubmit(onData)}>
+          <BtnText>Submit</BtnText>
+        </BtnSubmit>
+      </BtnWrapper>
+      {/* <ButtonTemp text="제출" disabled={false} onPress={handleSubmit(onData)} /> */}
+    </AddContainer>
   )
 }
 
 export default CreateContents
 
-const TextInput = styled.TextInput`
-  width: 60%;
+// const TextInput = styled.TextInput`
+//   width: 60%;
+//   padding: 15px 7px;
+//   margin-bottom: 8px;
+//   border-radius: 5px;
+//   font-size: 15px;
+//   font-weight: 800;
+//   /* margin-bottom: ${(props) => (props.lastOne ? 15 : 8)}px; */
+//   background-color: rgba(50, 120, 200, 0.3);
+//   color: rgba(0, 0, 0, 0.6);
+// `
+// const Views = styled.View`
+//   margin-top: 150px;
+// `
+
+const AddContainer = styled.View`
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+`
+const AddContentText = styled.TextInput`
+  padding: 15px 7px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: ${(props) => (props.lastOne ? 15 : 8)}px;
+  background-color: #d4f1f4;
+  color: rgba(0, 0, 0, 0.6);
+  height: 40px;
+  border-width: 1px;
+  width: 250px;
+  text-align: center;
+  padding: 10px;
+`
+const AddContentSub = styled.TextInput`
   padding: 15px 7px;
   margin-bottom: 8px;
   border-radius: 5px;
   font-size: 15px;
   font-weight: 800;
-  /* margin-bottom: ${(props) => (props.lastOne ? 15 : 8)}px; */
-  background-color: rgba(50, 120, 200, 0.3);
+  margin-bottom: ${(props) => (props.lastOne ? 15 : 8)}px;
+  background-color: #d4f1f4;
   color: rgba(0, 0, 0, 0.6);
+  height: 300px;
+  border-width: 1px;
+  width: 250px;
+  text-align: center;
+  white-space:normal;
 `
-const Views = styled.View`
-  margin-top: 150px;
+
+const BtnSubmit = styled.TouchableOpacity`
+  background-color: #75e6da;
+  padding: 15px 7px;
+  width: 100px;
+  border-radius: 10px;
+`
+const BtnClose = styled.TouchableOpacity`
+  background-color: #4c5270;
+  padding: 15px 7px;
+  width: 100px;
+  border-radius: 10px;
+`
+const BtnText = styled.Text`
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+`
+const BtnWrapper = styled.View`
+  flex-direction: row;
+  justify-content: space-around;
 `
