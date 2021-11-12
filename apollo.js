@@ -16,6 +16,7 @@ import { createUploadLink } from "apollo-upload-client"
 import { ApolloLink } from "apollo-boost"
 import { onError } from "apollo-link-error"
 
+// Apollo error 잡기
 const errorLink = onError(({ graphQLErrors }) => {
   if (graphQLErrors) graphQLErrors.map(({ message }) => console.log(message))
 })

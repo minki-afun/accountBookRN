@@ -1,6 +1,6 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import ContentLayout from "../components/main/ContentLayout"
-import { gql, useQuery } from "@apollo/client"
+import { gql, useLazyQuery, useQuery } from "@apollo/client"
 import { userId } from "../screens/User"
 import { tokenDecodeId } from "../apollo"
 import { Button, FlatList, Text, TouchableOpacity, View } from "react-native"
@@ -105,10 +105,6 @@ const DataTouchable = styled.TouchableOpacity`
   text-align: right;
   border-top-color: #b9b7bd;
   border-top-width: 1px;
-  &:last-child {
-    border-bottom-color: #b9b7bd;
-    border-bottom-width: 1px;
-  }
   margin-bottom: 2px;
   padding-top: 2px;
 `

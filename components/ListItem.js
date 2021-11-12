@@ -1,17 +1,16 @@
-import React from 'react'
-import { Text, View } from 'react-native'
-import styled from 'styled-components'
+import React from "react"
+import { Text, View } from "react-native"
+import styled from "styled-components"
 
-const ListItem = ({item, navigation}) => {
-  const DetailContent = () => navigation.navigate("DetailContent",{
-    item
-  })
+const ListItem = ({ item, navigation }) => {
+  const DetailContent = () =>
+    navigation.navigate("DetailContent", {
+      item,
+    })
 
-return (
+  return (
     <DataContainer>
-      <DataTouchable
-       onPress={DetailContent}
-      >
+      <DataTouchable onPress={DetailContent}>
         <DataWrapper>
           <DataSub>{item.date}</DataSub>
           <DataSub>{item.product}</DataSub>
@@ -19,8 +18,7 @@ return (
         </DataWrapper>
       </DataTouchable>
     </DataContainer>
-)
-  
+  )
 }
 
 export default ListItem
@@ -40,10 +38,6 @@ const DataTouchable = styled.TouchableOpacity`
   text-align: right;
   border-top-color: #b9b7bd;
   border-top-width: 1px;
-  &:last-child {
-    border-bottom-color: #b9b7bd;
-    border-bottom-width: 1px;
-  }
   margin-bottom: 2px;
   padding-top: 2px;
 `

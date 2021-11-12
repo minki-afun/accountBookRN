@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import styled from "styled-components"
 import { View, Text, Button } from "react-native"
 import ButtonTemp from "./main/ButtonTemp"
+import { CommonActions } from "@react-navigation/native"
 
 const CREATE_CONTENT_MUTATION = gql`
   mutation addContents(
@@ -31,7 +32,8 @@ const CreateContents = ({ navigation }) => {
       addContents: { result, error },
     } = data
     if (result) {
-      navigation.navigate("Content", {})
+      navigation.dispatch(CommonActions.navigate("Content"))
+      // navigation.navigate("Content")
     } else {
       alert(error)
     }
@@ -51,7 +53,6 @@ const CreateContents = ({ navigation }) => {
   )
   const onData = (data) => {
     if (!loading) {
-      console.log("data : ", data)
       try {
         createContentMutation({
           variables: {
