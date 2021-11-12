@@ -45,32 +45,45 @@ const DetailContent = ({navigation, route})=> {
       <DetailWrapper>
         <ContentBox>
           <ContentTitle>Id: 
-          <ContentSub>{id}</ContentSub>
+            <ContentSub>{id}</ContentSub>
           </ContentTitle>
         </ContentBox>
+
         <ContentBox>
-          <ContentTitle>거래 날짜: </ContentTitle>
+          <ContentTitle>거래 날짜:
+
           <ContentSub>{date}</ContentSub>
+          </ContentTitle>
         </ContentBox>
+
         <ContentBox>
-          <ContentTitle>거래명: </ContentTitle>
-          <ContentSub>{product}</ContentSub>
+          <ContentTitle>거래명: 
+            <ContentSub>{product}</ContentSub>
+          </ContentTitle>
         </ContentBox>
+
         <ContentBox>
-          <ContentTitle>금액: </ContentTitle>
-          <ContentSub>{price}</ContentSub>
+          <ContentTitle>금액: 
+            <ContentSub>{price}</ContentSub>
+          </ContentTitle>
         </ContentBox>
+
+        <ScriptBox>
+          <ContentTitle>내용:
+          </ContentTitle>
+            <ContentScript>{text}</ContentScript>
+        </ScriptBox>
+
         <ContentBox>
-          <ContentTitle>내용: </ContentTitle>
-          <ContentSub>{text}</ContentSub>
+          <ContentTitle>최초작성일: 
+            <ContentSub>{createdAt}</ContentSub>
+          </ContentTitle>
         </ContentBox>
+
         <ContentBox>
-          <ContentTitle>최초작성일: </ContentTitle>
-          <ContentSub>{createdAt}</ContentSub>
-        </ContentBox>
-        <ContentBox>
-          <ContentTitle>수정일: </ContentTitle>
-          <ContentSub>{updatedAt}</ContentSub>
+          <ContentTitle>수정일: 
+            <ContentSub>{updatedAt}</ContentSub>
+          </ContentTitle>
         </ContentBox>
 
       </DetailWrapper>
@@ -97,12 +110,10 @@ const DetailContainer = styled.View`
 const DetailWrapper = styled.View`
   margin-bottom: 20px;
 `
-const ContentBox = styled.Text`
+const ContentBox = styled.View`
   border-radius:5px;
   background-color: #D4F1F4;
-  height:6%;
   margin-bottom:20px;
-  justify-content:center;
   border:1px solid #000;
   height: 30px;
   `
@@ -110,12 +121,25 @@ const ContentTitle = styled.Text`
   text-align:left;
   font-size:18px;
   font-weight:800;
-  
+  padding:3px 7px;
   `
 const ContentSub = styled.Text`
   text-align:center;
   font-weight:400;
   font-size:18px;
+`
+const ScriptBox = styled.View`
+border-radius:5px;
+  background-color: #D4F1F4;
+  margin-bottom:20px;
+  border:1px solid #000;
+  height: 200px;
+`
+const ContentScript = styled.Text`
+  text-align:center;
+  font-weight:400;
+  font-size:18px;
+  height:400px;
 `
 const BtnSubmit = styled.TouchableOpacity`
   background-color: #75E6DA;
@@ -134,6 +158,7 @@ const BtnClose = styled.TouchableOpacity`
   text-align:center;
   color:#fff;
   font-size:20px;
+  flex-shrink:1;
   `
 const BtnWrapper = styled.View`
   flex-direction:row;
