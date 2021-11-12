@@ -6,6 +6,7 @@ import { tokenDecodeId } from "../apollo"
 import { Button, FlatList, Text, TouchableOpacity, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components"
+import ListItem from "../components/ListItem"
 
 // query 연결
 const CONTENT_QUERY = gql`
@@ -15,16 +16,20 @@ const CONTENT_QUERY = gql`
       product
       price
       sign
+      text
       date
       total
       plusTotal
       minusTotal
+      createdAt
+      updatedAt
     }
   }
 `
 
 const Content = ({ navigation }) => {
-  const goContentDetail = () => navigation.navigate("CreateContent")
+  const AddContent = () => navigation.navigate("CreateContent")
+  // const DetailContent = () => navigation.navigate("DetailContent")
   const { loading, error, data } = useQuery(CONTENT_QUERY, {
     variables: { userId: tokenDecodeId() },
   })
@@ -37,21 +42,24 @@ const Content = ({ navigation }) => {
     )
   }
   if (error) {
-    ;<View>
+    <View>
       <Text>"ERROR"</Text>
     </View>
   }
-  const renderContents = ({ item }) => (
-    <DataContainer>
-      <DataTouchable>
-        <DataWrapper>
-          <DataSub>{item.date}</DataSub>
-          <DataSub>{item.product}</DataSub>
-          <DataSub>{item.price}</DataSub>
-        </DataWrapper>
-      </DataTouchable>
-    </DataContainer>
-  )
+  // const renderContents = ({ item }) => (
+
+  //   <DataContainer>
+  //     <DataTouchable
+  //      onPress={DetailContent}
+  //     >
+  //       <DataWrapper>
+  //         <DataSub>{item.date}</DataSub>
+  //         <DataSub>{item.product}</DataSub>
+  //         <DataSub>{item.price}</DataSub>
+  //       </DataWrapper>
+  //     </DataTouchable>
+  //   </DataContainer>
+  // )
 
   return (
     <ContentLayout>
@@ -65,11 +73,16 @@ const Content = ({ navigation }) => {
             </DataWrapper>
           }
           data={data?.seeContents}
-          renderItem={renderContents}
+          renderItem={({item}) => {
+            return (
+              <ListItem item={item} navigation={navigation}/>
+            )
+          }}
+          // renderItem={renderContents}
           keyExtractor={(data) => data?.id}
-          onPress={goContentDetail}
+          onPress={AddContent}
         />
-        <Button title="가계부 추가" onPress={goContentDetail} />
+        <Button title="가계부 추가" onPress={AddContent} />
       </SafeAreaView>
     </ContentLayout>
   )

@@ -18,7 +18,7 @@ const CREATE_CONTENT_MUTATION = gql`
       product: $product
       price: $price
       text: $text
-      date: $date0
+      date: $date
       sign: $sign
       userId: $userId
     ) {
@@ -50,39 +50,39 @@ const CreateContent = ({ navigation }) => {
     }
     )
     const submitData = (data) => {
-      console.log('tttt')
-    if (!loading) {
-      createContentMutation({
-        variables: {
-          ...data,
-        },
-      })
+      if (!loading) {
+        console.log('tttt')
+        createContentMutation({
+          variables: {
+            ...data,
+          },
+        })
+      }
     }
-  }
-  // 필수 항목 표시
-  useEffect(() => {
-    register("pruduct", {
-      required: true,
-    })
-    register("price", {
-      required: true,
-    })
-    register("date", {
-      required: true,
-    })
-    register("text", {
-      required: false,
-    })
-    register("sign", {
-      required: false,
-    })
-    register("userId", {
-      required: false,
-    })
-  }, [register])
-
-  return (
-    <AddContainer>
+    // 필수 항목 표시
+    useEffect(() => {
+      register("product", {
+        required: true,
+      })
+      register("price", {
+        required: true,
+      })
+      register("date", {
+        required: true,
+      })
+      register("text", {
+        required: false,
+      })
+      register("sign", {
+        required: false,
+      })
+      register("userId", {
+        required: false,
+      })
+    }, [register])
+    
+    return (
+      <AddContainer>
       <AddContentText
         value={watch("date")}
         placeholder="거래 날짜"
@@ -119,15 +119,15 @@ const CreateContent = ({ navigation }) => {
         <BtnClose onPress={()=> navigation.navigate("Content")}>
           <BtnText>Close</BtnText>
         </BtnClose>
-        <ButtonTemp 
+        {/* <ButtonTemp 
           text="Submit"
           onPress={handleSubmit(submitData)}
-        />
-        {/* <BtnSubmit
+        /> */}
+        <BtnSubmit
           onPress={handleSubmit(submitData)}
         >
           <BtnText>Submit</BtnText>
-        </BtnSubmit> */}
+        </BtnSubmit>
       </BtnWrapper>
     </AddContainer>
   )
