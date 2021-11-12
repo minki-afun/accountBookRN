@@ -24,6 +24,7 @@ const CONTENT_QUERY = gql`
 `
 
 const Content = ({ navigation }) => {
+  console.log("here is Content", tokenDecodeId())
   const goContentDetail = () => navigation.navigate("CreateContent")
   const { loading, error, data } = useQuery(CONTENT_QUERY, {
     variables: { userId: tokenDecodeId() },
@@ -37,9 +38,11 @@ const Content = ({ navigation }) => {
     )
   }
   if (error) {
-    ;<View>
-      <Text>"ERROR"</Text>
-    </View>
+    return (
+      <View>
+        <Text>"ERROR"</Text>
+      </View>
+    )
   }
   const renderContents = ({ item }) => (
     <DataContainer>
