@@ -1,8 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import { gql, useMutation } from "@apollo/client"
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
-import { View, Text, Button } from "react-native"
+import { View, Text, Button, Switch } from "react-native"
 import ButtonTemp from "./main/ButtonTemp"
 import { CommonActions } from "@react-navigation/native"
 
@@ -11,13 +11,17 @@ const CREATE_CONTENT_MUTATION = gql`
     $product: String!
     $price: Int!
     $text: String
-    $date: Int! # $sign: Boolean # $userId: Int
+    $date: Int! 
+    $sign: Boolean
+    # $sign: Boolean # $userId: Int
   ) {
     addContents(
       product: $product
       price: $price
       text: $text
-      date: $date # sign: $sign # userId: $userId
+      date: $date
+      sign: $sign 
+      # sign: $sign # userId: $userId
     ) {
       result
       error
@@ -60,6 +64,7 @@ const CreateContents = ({ navigation }) => {
             price: Number(data.price),
             product: data.product,
             text: data.text,
+            sign: data.sign
           },
         })
       } catch (error) {
@@ -67,6 +72,9 @@ const CreateContents = ({ navigation }) => {
       }
     }
   }
+  //수입 지출 표시를 위한 Boolean 값 변환
+  const [isEnabled, setIsEnabled] = useState(false);
+  
   return (
     <AddContainer>
       <AddContentText
@@ -87,6 +95,14 @@ const CreateContents = ({ navigation }) => {
         autoCapitalize="none"
         onChangeText={(text) => setValue("price", text)}
       />
+      <BtnToggle onPress={()=> {
+        setIsEnabled(!isEnabled)
+        setValue("sign", isEnabled)
+      }}>
+        <BtnText>
+        {isEnabled ? "지출":"수입"}
+          </BtnText>
+      </BtnToggle>
       <AddContentSub
         value={watch("text")}
         placeholder="거래 내용"
@@ -180,4 +196,15 @@ const BtnText = styled.Text`
 const BtnWrapper = styled.View`
   flex-direction: row;
   justify-content: space-around;
+`
+const BtnToggle = styled.TouchableOpacity`
+  background-color: ${props=>props.isEnabled ? "#75e6da" : "#4c5270"};
+  width:100px;
+  height:30px;
+  border-radius: 5px;
+  text-align:center;
+  justify-content:center;
+  margin: auto;
+  margin-bottom:10px;
+  
 `

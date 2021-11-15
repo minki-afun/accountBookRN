@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import styled from 'styled-components'
 import { tokenDecodeId } from '../apollo'
 import ContentLayout from './main/ContentLayout'
+import DeleteContents from "./DeleteContents"
 
 const DETAIL_CONTENT_QUERY = gql`
   query detailContent($id:Int!){
@@ -22,9 +23,9 @@ const DETAIL_CONTENT_QUERY = gql`
 `
 
 const DetailContent = ({navigation, route})=> {
-  console.log(route.params.item)
+  // console.log(route.params.item)
   const {date, id, price, product, text, createdAt, updatedAt} = route.params.item
-  const EditContent = () => navigation.navigate("EditContent")
+  // const EditContent = () => navigation.navigate("EditContent")
   const {loading, error, data} = useQuery(DETAIL_CONTENT_QUERY, {
     variables:{userId: tokenDecodeId()}
   })
@@ -91,9 +92,11 @@ const DetailContent = ({navigation, route})=> {
         <BtnClose onPress={()=> navigation.navigate("Content")}>
           <BtnText>Close</BtnText>
         </BtnClose>
-        <BtnSubmit onPress={()=>navigation.navigate("EditContent")} >
+        <DeleteContents dltid={id} navigation={navigation} />
+        <BtnSubmit onPress={()=>navigation.navigate("EditContent", {id})} >
           <BtnText>Edit</BtnText>
         </BtnSubmit>
+
       </BtnWrapper>
     </DetailContainer>
   )
