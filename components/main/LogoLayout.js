@@ -1,11 +1,5 @@
 import React from "react"
-import {} from "react-native"
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  TouchableWithoutFeedback,
-} from "react-native"
+import { Keyboard, Platform } from "react-native"
 import styled from "styled-components/native"
 
 const LogoLayout = ({ children }) => {

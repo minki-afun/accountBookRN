@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { View, Text, Button } from "react-native"
 import { Modal } from "react-native-modals"
-import { ModalPortal } from "react-native-modals"
 import styled from "styled-components/native"
 
 const Wrapper = () => {

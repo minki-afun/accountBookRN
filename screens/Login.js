@@ -1,7 +1,6 @@
 import { gql, useMutation } from "@apollo/client"
 import React, { useEffect, useRef } from "react"
 import { useForm } from "react-hook-form"
-import { Text, View } from "react-native"
 import styled from "styled-components/native"
 import { logUserIn } from "../apollo"
 import ButtonTemp from "../components/main/ButtonTemp"

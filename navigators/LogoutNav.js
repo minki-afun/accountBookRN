@@ -1,11 +1,8 @@
 import React from "react"
-import { TouchableOpacity, Image } from "react-native"
 import { createStackNavigator } from "@react-navigation/stack"
-
 import Main from "../screens/Main"
 import Login from "../screens/Login"
 import Register from "../screens/Register"
-import styled from "styled-components"
 
 const Stack = createStackNavigator()
 

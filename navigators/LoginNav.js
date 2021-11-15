@@ -1,13 +1,10 @@
 import React from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import Content from "../screens/Content"
 import User from "../screens/User"
 import { logUserOut } from "../apollo"
 import styled from "styled-components/native"
-import { Text, View, Image } from "react-native"
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"
 import { createStackNavigator } from "@react-navigation/stack"
-import CreateContent from "../components/CreateContent"
 import ContentNav from "./ContentNav"
 
 const Tabs = createBottomTabNavigator()

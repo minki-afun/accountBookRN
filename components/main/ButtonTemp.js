@@ -1,5 +1,4 @@
 import React from "react"
-import { View, Text, ActivityIndicator } from "react-native"
 import styled from "styled-components/native"
 
 const ButtonTemp = ({ onPress, disabled, text, loading }) => {

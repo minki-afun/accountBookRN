@@ -1,16 +1,6 @@
 import { gql, useQuery } from "@apollo/client"
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import React, { useEffect, useState } from "react"
-import {
-  View,
-  Text,
-  Button,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  Alert,
-} from "react-native"
-import { isLoggedInVar, logUserOut, tokenDecodeId, tokenVar } from "../apollo"
+import React from "react"
+import { tokenDecodeId } from "../apollo"
 import styled from "styled-components/native"
 import Balance from "../components/Balance"
 import Wrapper from "../components/Wrapper"

@@ -1,11 +1,8 @@
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import React, { useEffect, useState } from "react"
-import { View, Text, Button } from "react-native"
-import { isLoggedInVar, logUserOut, tokenVar } from "../../apollo"
+import React from "react"
+import { Text } from "react-native"
 import styled from "styled-components/native"
 import { tokenDecodeId } from "../../apollo"
 import { gql, useQuery } from "@apollo/client"
-import CreateContent from "../CreateContent"
 
 const LOOK_BALANCE = gql`
   query seeBalance($userId: Int!) {

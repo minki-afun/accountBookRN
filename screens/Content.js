@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import ContentLayout from "../components/main/ContentLayout"
-import { gql, useLazyQuery, useQuery } from "@apollo/client"
-import { userId } from "../screens/User"
+import { gql, useQuery } from "@apollo/client"
 import { tokenDecodeId } from "../apollo"
-import {
-  Button,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  View,
-  ScrollView,
-} from "react-native"
+import { Button, FlatList, Text, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components"
 import ListItem from "../components/ListItem"

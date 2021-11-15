@@ -2,8 +2,6 @@ import { gql, useMutation } from "@apollo/client"
 import React, { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
-import { View, Text, Button } from "react-native"
-import ButtonTemp from "./main/ButtonTemp"
 
 const CREATE_CONTENT_MUTATION = gql`
   mutation addContents(
