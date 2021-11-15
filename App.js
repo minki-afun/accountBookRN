@@ -10,6 +10,7 @@ import { Asset } from "expo-asset"
 import LogoutNav from "./navigators/LogoutNav"
 import LoginNav from "./navigators/LoginNav"
 import { ModalPortal } from "react-native-modals"
+import { AsyncStorageWrapper, persistCache } from "apollo3-cache-persist"
 
 export default function App() {
   // 로그인 인지 확인
@@ -23,6 +24,12 @@ export default function App() {
       isLoggedInVar(true)
       tokenVar(token)
     }
+    // // 백엔드 서버가 끊겨도 프로필은 보이게 하기 위한 스토리지 (cache는 apollo에서 import해야함)
+    // await persistCache({
+    //   cache,
+    //   storage: new AsyncStorageWrapper(AsyncStorage),
+    //   serialize: false, // 언제든지 스키마(쿼리)를 변경하면서 작업할 수 있다(개발 할때 유용)
+    // })
     const imagesToLoad = [require("./assets/logo.png")]
     const imagePromises = imagesToLoad.map((image) => Asset.loadAsync(image))
     return Promise.all([...imagePromises])

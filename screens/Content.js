@@ -3,10 +3,18 @@ import ContentLayout from "../components/main/ContentLayout"
 import { gql, useLazyQuery, useQuery } from "@apollo/client"
 import { userId } from "../screens/User"
 import { tokenDecodeId } from "../apollo"
-import { Button, FlatList, Text, TouchableOpacity, View } from "react-native"
+import {
+  Button,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View,
+  ScrollView,
+} from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import styled from "styled-components"
 import ListItem from "../components/ListItem"
+import ScreenLayout from "../components/ScreenLayout"
 
 // query 연결
 const CONTENT_QUERY = gql`
@@ -30,7 +38,8 @@ const CONTENT_QUERY = gql`
 const Content = ({ navigation }) => {
   const AddContent = () => navigation.navigate("CreateContent")
   // const DetailContent = () => navigation.navigate("DetailContent")
-  const { loading, error, data } = useQuery(CONTENT_QUERY, {
+  const [refreshing, setRefreshing] = useState(false)
+  const { loading, data, refetch } = useQuery(CONTENT_QUERY, {
     variables: { userId: tokenDecodeId() },
   })
   // console.log(data)
@@ -62,29 +71,37 @@ const Content = ({ navigation }) => {
   //     </DataTouchable>
   //   </DataContainer>
   // )
-
+  const refresh = async () => {
+    setRefreshing(true)
+    await refetch()
+    setRefreshing(false)
+  }
   return (
-    <ContentLayout>
-      <SafeAreaView>
-        <FlatList
-          ListHeaderComponent={
-            <DataWrapper>
-              <DataTitle>날짜</DataTitle>
-              <DataTitle>목록</DataTitle>
-              <DataTitle>금액</DataTitle>
-            </DataWrapper>
-          }
-          data={data?.seeContents}
-          renderItem={({ item }) => {
-            return <ListItem item={item} navigation={navigation} />
-          }}
-          // renderItem={renderContents}
-          keyExtractor={(data) => data?.id}
-          onPress={AddContent}
-        />
-        <Button title="가계부 추가" onPress={AddContent} />
-      </SafeAreaView>
-    </ContentLayout>
+    <ScreenLayout loading={loading}>
+      <ContentLayout>
+        <SafeAreaView>
+          <FlatList
+            ListHeaderComponent={
+              <DataWrapper>
+                <DataTitle>날짜</DataTitle>
+                <DataTitle>목록</DataTitle>
+                <DataTitle>금액</DataTitle>
+              </DataWrapper>
+            }
+            data={data?.seeContents}
+            renderItem={({ item }) => {
+              return <ListItem item={item} navigation={navigation} />
+            }}
+            // renderItem={renderContents}
+            keyExtractor={(data) => data?.id}
+            onPress={AddContent}
+            refreshing={refreshing}
+            onRefresh={refresh}
+          />
+          <Button title="가계부 추가" onPress={AddContent} />
+        </SafeAreaView>
+      </ContentLayout>
+    </ScreenLayout>
   )
 }
 

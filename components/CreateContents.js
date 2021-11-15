@@ -156,7 +156,7 @@ const AddContentSub = styled.TextInput`
   border-width: 1px;
   width: 250px;
   text-align: center;
-  white-space:normal;
+  /* white-space:normal; */
 `
 
 const BtnSubmit = styled.TouchableOpacity`
