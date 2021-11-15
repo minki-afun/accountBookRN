@@ -11,7 +11,11 @@ const Stack = createStackNavigator()
 
 const ContentNav = ({}) => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen name="Content" component={Content} />
       <Stack.Screen name="CreateContent" component={CreateContents} />
       <Stack.Screen name="DetailContent" component={DetailContent} />

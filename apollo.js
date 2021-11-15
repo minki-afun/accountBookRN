@@ -63,24 +63,24 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-// // 서버가 끊겨도 볼 수 있게끔 설정위해서 끄집어낸다
-// // App.js 가서 스토리지 저장하게끔 만든다
-// export const cache = new InMemoryCache({
-//   typePolicies: {
-//     Query: {
-//       fields: {
-//         seeFeed: offsetLimitPagination(),
-//       },
-//     },
-//   },
-// })
+// 서버가 끊겨도 볼 수 있게끔 설정위해서 끄집어낸다
+// App.js 가서 스토리지 저장하게끔 만든다
+export const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        seeFeed: offsetLimitPagination(),
+      },
+    },
+  },
+})
 
 // 아폴로 연결
 const client = new ApolloClient({
   // link: authLink.concat(httpLink),
   link: ApolloLink.from([errorLink, authLink, httpLink]),
-  cache: new InMemoryCache(),
-  // cache,
+  // cache: new InMemoryCache(),
+  cache,
 })
 
 export default client

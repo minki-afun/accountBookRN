@@ -14,6 +14,7 @@ import { isLoggedInVar, logUserOut, tokenDecodeId, tokenVar } from "../apollo"
 import styled from "styled-components/native"
 import Balance from "../components/Balance"
 import Wrapper from "../components/Wrapper"
+import { Ionicons } from "@expo/vector-icons"
 
 const USER_DATA = gql`
   query userData($id: Int!) {
@@ -37,16 +38,23 @@ const User = () => {
   //     </Container>
   //   )
   // }
-
   return (
-    <ViewContainer>
-      <BoxView>
-        <BoxDiv>{data?.userData.email}</BoxDiv>
-        <BoxDiv2>환영합니다</BoxDiv2>
-      </BoxView>
+    <Container>
+      <ProfileContainer>
+        <Ionicons name="person" size={50} />
+        <ProfileText>{data?.userData.email}</ProfileText>
+      </ProfileContainer>
       <Balance userId={tokenDecodeId()} />
       <Wrapper />
-    </ViewContainer>
+    </Container>
+    // <ViewContainer>
+    //   <BoxView>
+    //     <BoxDiv>{data?.userData.email}</BoxDiv>
+    //     <BoxDiv2>환영합니다</BoxDiv2>
+    //   </BoxView>
+    //   <Balance userId={tokenDecodeId()} />
+    //   <Wrapper />
+    // </ViewContainer>
   )
 }
 
@@ -54,46 +62,21 @@ export default User
 
 const Container = styled.View`
   flex: 1;
-  justify-content: center;
-  align-items: center;
+  /* align-items: center; */
+  /* background-color: #444444; */
 `
-const ImageStyle = styled.Image`
-  width: 150px;
-  height: 150px;
+const ProfileContainer = styled.View`
+  /* border: 1px solid gray; */
+  /* border-radius: 30px; */
+  margin-top: 100px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding: 20px 30px;
+  flex-direction: row;
+  align-items: center;
 `
 
-const ViewContainer = styled.View`
-  flex: 1;
-  padding: 10px 10px;
-  background-color: white;
-`
-const BoxView = styled.View`
-  background-color: rgba(50, 80, 170, 0.3);
-  width: 100%;
-  height: 120px;
-  border-radius: 20px;
-  padding: 10px 10px;
-  align-items: center;
-  justify-content: center;
-  margin-top: 25%;
-`
-const BoxDiv = styled.Text`
-  color: white;
-  font-weight: 800;
-  font-size: 35px;
-  text-align: left;
-`
-const BoxDiv2 = styled.Text`
-  color: white;
-  font-size: 35px;
-  text-align: left;
-`
-
-const ModalView = styled.View`
-  flex-direction: column;
-  align-items: center;
-  width: 320px;
-  height: 220px;
-  background-color: blue;
-  border-radius: 10px;
+const ProfileText = styled.Text`
+  margin-left: 20px;
+  font-size: 25px;
 `
